@@ -6,4 +6,4 @@ class Blog(BaseModel):
     body: str
 
     class config:
-        orm = True
+        from_attributes = True
