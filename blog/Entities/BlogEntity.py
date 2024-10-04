@@ -1,10 +1,9 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Column, Integer, String
 
 from blog.database import Base
 
 
-class Blog(Base):
-
+class BlogEntity(Base):
     __tablename__ = 'blogs'
 
     id = Column(Integer, primary_key=True, index=True)
