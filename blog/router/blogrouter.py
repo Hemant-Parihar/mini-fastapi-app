@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, status, Depends
 from blog import database
 from sqlalchemy.orm import Session
-from blog.model.Blog import Blog
+from blog.model.Blog import Blog, BlogResponse
 from blog.service.BlogService import BlogService
 
 router = APIRouter(
@@ -14,17 +14,17 @@ router = APIRouter(
 get_db = database.get_db
 
 
-@router.post("", status_code=status.HTTP_201_CREATED, response_model=Blog)
+@router.post("", status_code=status.HTTP_201_CREATED, response_model=BlogResponse)
 def create_blog(request: Blog, db: Session = Depends(get_db)):
     return BlogService().create_blog(request, db)
 
 
-@router.get("", response_model=List[Blog])
+@router.get("", response_model=List[BlogResponse])
 def get_all_blog(db: Session = Depends(get_db)):
     return BlogService().get_blogs(db)
 
 
-@router.get('/{id}', status_code=status.HTTP_200_OK, response_model=Blog)
+@router.get('/{id}', status_code=status.HTTP_200_OK, response_model=BlogResponse)
 def get_blog(id, db: Session = Depends(get_db)):
     return BlogService().get_blog(id, db)
 

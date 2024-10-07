@@ -23,7 +23,7 @@ class BlogService:
 
     @staticmethod
     def create_blog(request, db):
-        new_blog = BlogEntity(title=request.title, body=request.body)
+        new_blog = BlogEntity(title=request.title, body=request.body, user_id=1)
         db.add(new_blog)
         db.commit()
         db.refresh(new_blog)

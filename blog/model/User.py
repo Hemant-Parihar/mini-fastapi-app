@@ -10,6 +10,3 @@ class UserDTO(BaseModel):
 class UserResponseDTO(BaseModel):
     username: str
     email: str
-
-    class Config:
-        from_attributes = True

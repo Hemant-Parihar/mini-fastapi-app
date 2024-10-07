@@ -1,5 +1,6 @@
 from blog.Entities import UserEntity
 from blog.model.User import UserDTO
+from blog.hashing import get_password_hash
 
 
 class UserService:
@@ -7,8 +8,10 @@ class UserService:
     def __init__(self):
         pass
 
-    def create_user(self, request: UserDTO, db):
-        new_user = UserEntity(username=request.username, email=request.email, password=request.password)
+    @staticmethod
+    def create_user(request: UserDTO, db):
+        hash_password = get_password_hash(request.password)
+        new_user = UserEntity(username=request.username, email=request.email, password=hash_password)
         db.add(new_user)
         db.commit()
         db.refresh(new_user)

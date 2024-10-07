@@ -1,9 +1,12 @@
 from pydantic import BaseModel
 
+from blog.model.User import UserResponseDTO
+
 
 class Blog(BaseModel):
     title: str
     body: str
 
-    class config:
-        from_attributes = True
+
+class BlogResponse(Blog):
+    user: UserResponseDTO
