@@ -2,6 +2,7 @@ fastapi~=0.115.0
 uvicorn
 sqlalchemy~=2.0.35
 pydantic~=2.9.2
-passlib~=1.7.4
+passlib
 bcrypt
 pyjwt
+python-multipart

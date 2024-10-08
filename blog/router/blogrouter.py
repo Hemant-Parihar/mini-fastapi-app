@@ -4,6 +4,8 @@ from fastapi import APIRouter, status, Depends
 from blog import database
 from sqlalchemy.orm import Session
 from blog.model.Blog import Blog, BlogResponse
+from blog.model.User import UserResponseDTO
+from blog.router.authentication import get_current_active_user
 from blog.service.BlogService import BlogService
 
 router = APIRouter(
@@ -20,7 +22,7 @@ def create_blog(request: Blog, db: Session = Depends(get_db)):
 
 
 @router.get("", response_model=List[BlogResponse])
-def get_all_blog(db: Session = Depends(get_db)):
+def get_all_blog(db: Session = Depends(get_db), current_user: UserResponseDTO = Depends(get_current_active_user)):
     return BlogService().get_blogs(db)
 
 
